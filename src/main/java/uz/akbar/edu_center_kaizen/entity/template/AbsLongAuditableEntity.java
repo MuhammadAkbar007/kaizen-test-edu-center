@@ -22,7 +22,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class AbsLongAuditableEntity {
+public class AbsLongAuditableEntity extends AbsLongEntity {
 
 	@CreatedBy
 	@Column(updatable = false)
