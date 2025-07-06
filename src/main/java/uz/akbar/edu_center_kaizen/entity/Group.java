@@ -12,43 +12,46 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import uz.akbar.edu_center_kaizen.entity.template.AbsUUIDEntity;
-import uz.akbar.edu_center_kaizen.enums.GeneralStatus;
+import uz.akbar.edu_center_kaizen.entity.template.AbsLongEntity;
+import uz.akbar.edu_center_kaizen.enums.GroupStatus;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-@EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "users")
-public class User extends AbsUUIDEntity {
+@Table(name = "groups")
+public class Group extends AbsLongEntity {
 
 	@Column(nullable = false, unique = true)
-	private String username; // email or phone
+	private String name; // e.g., "Java-101", "Spring-Advanced"
+
+	@Column(columnDefinition = "text")
+	private String description;
+
+	@ManyToOne
+	@JoinColumn(name = "teacher_id", nullable = false)
+	private Teacher teacher;
 
 	@Column(nullable = false)
-	private String password;
-
-	@Column(nullable = false)
-	@Enumerated(EnumType.STRING)
-	private GeneralStatus status; // ACTIVE or BLOCK
+	private String subject; // "Java", "English", "Math"
 
 	@Builder.Default
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<RefreshToken> refreshTokens = new HashSet<>();
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	private GroupStatus groupStatus = GroupStatus.STUDYING;
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-	private Set<Role> roles;
+	@Builder.Default
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
+	@JoinTable(name = "groups_students", joinColumns = @JoinColumn(name = "group_id"), inverseJoinColumns = @JoinColumn(name = "student_id"))
+	private Set<Student> students = new HashSet<>();
 }

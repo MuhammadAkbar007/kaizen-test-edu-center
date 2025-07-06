@@ -30,8 +30,10 @@ Create the group teacher and student entities and do full CRUD of them.
 Write the appropriate fields for the group teacher and student entities.
 
 ## Tasks
- - [-] push to github
- - [ ] implement Security
+ - [x] implement Security
+ - [-] draw entity chart
+ - [ ] implement JpaAuditing
  - [ ] add swagger & its cofig
  - [ ] write README.md
+  - include chart.png reference
 
