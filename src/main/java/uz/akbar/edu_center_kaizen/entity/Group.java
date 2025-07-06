@@ -20,7 +20,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import uz.akbar.edu_center_kaizen.entity.template.AbsLongEntity;
+import uz.akbar.edu_center_kaizen.entity.template.AbsLongAuditableEntity;
 import uz.akbar.edu_center_kaizen.enums.GroupStatus;
 
 @Getter
@@ -30,7 +30,7 @@ import uz.akbar.edu_center_kaizen.enums.GroupStatus;
 @SuperBuilder
 @Entity
 @Table(name = "groups")
-public class Group extends AbsLongEntity {
+public class Group extends AbsLongAuditableEntity {
 
 	@Column(nullable = false, unique = true)
 	private String name; // e.g., "Java-101", "Spring-Advanced"

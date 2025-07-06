@@ -19,7 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import uz.akbar.edu_center_kaizen.entity.template.AbsLongEntity;
+import uz.akbar.edu_center_kaizen.entity.template.AbsLongAuditableEntity;
 import uz.akbar.edu_center_kaizen.enums.StudentStatus;
 
 @Getter
@@ -29,7 +29,7 @@ import uz.akbar.edu_center_kaizen.enums.StudentStatus;
 @SuperBuilder
 @Entity
 @Table(name = "students")
-public class Student extends AbsLongEntity {
+public class Student extends AbsLongAuditableEntity {
 
 	@OneToOne
 	@JoinColumn(name = "user_id", nullable = false, unique = true)
@@ -43,8 +43,6 @@ public class Student extends AbsLongEntity {
 
 	@Column(unique = true)
 	private String phoneNumber;
-
-	private String studentId; // enrollment number
 
 	private LocalDate dateOfBirth;
 

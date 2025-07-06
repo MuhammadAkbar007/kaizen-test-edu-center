@@ -1,5 +1,6 @@
 package uz.akbar.edu_center_kaizen.entity;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import uz.akbar.edu_center_kaizen.entity.template.AbsLongEntity;
+import uz.akbar.edu_center_kaizen.entity.template.AbsLongAuditableEntity;
 
 @Getter
 @Setter
@@ -26,7 +27,7 @@ import uz.akbar.edu_center_kaizen.entity.template.AbsLongEntity;
 @SuperBuilder
 @Entity
 @Table(name = "teachers")
-public class Teacher extends AbsLongEntity {
+public class Teacher extends AbsLongAuditableEntity {
 
 	@OneToOne
 	@JoinColumn(name = "user_id", nullable = false, unique = true)
@@ -38,10 +39,14 @@ public class Teacher extends AbsLongEntity {
 	@Column(nullable = false)
 	private String lastName;
 
+	@Column(nullable = false, unique = true)
+	private String phoneNumber;
+
 	private String specialization;
 
-	@Column(unique = true)
-	private String phoneNumber;
+	private String qualification;
+
+	private LocalDate hireDate;
 
 	@Builder.Default
 	@OneToMany(mappedBy = "teacher", cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)

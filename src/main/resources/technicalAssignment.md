@@ -31,8 +31,9 @@ Write the appropriate fields for the group teacher and student entities.
 
 ## Tasks
  - [x] implement Security
- - [-] draw entity chart
- - [ ] implement JpaAuditing
+ - [x] draw entity chart
+ - [x] implement JpaAuditing
+ - [-] data seeder for admin
  - [ ] add swagger & its cofig
  - [ ] write README.md
   - include chart.png reference
