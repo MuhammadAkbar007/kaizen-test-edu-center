@@ -1,0 +1,20 @@
+### login as admin
+POST http://localhost:8080/api/v1/auth/login
+Content-Type: application/json
+
+{
+	"username": "akbarjondev007@gmail.com",
+	"password": "root123"
+}
+
+### create group as admin
+POST http://localhost:8080/api/v1/group
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJha2JhcmpvbmRldjAwN0BnbWFpbC5jb20iLCJ1c2VySWQiOiIyMDc3NTJjMy02Y2E0LTQzZTktYTlhZS1mOWFkM2E5ZjM4M2EiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiaWF0IjoxNzUxOTE2Njg2LCJleHAiOjE3NTE5MjAyODZ9.7JztksqoQVr9biZR3UGL7reRYGdQMGF_U9phn4fGMAfl37YA7supAplgu-LrYd6_EvhMfgL2AuhXKs4BR1Abpw
+Content-Type: application/json
+
+{
+	"name": "Java-777",
+	"description": "Java-777 group for programming",
+	"subject": "Software Development",
+	"teacherId": 3
+}

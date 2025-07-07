@@ -2,6 +2,7 @@ package uz.akbar.edu_center_kaizen.service.implementation;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -176,19 +177,33 @@ public class TeacherServiceImpl implements TeacherService {
 	@Transactional
 	@Override
 	public void delete(Long id, DeleteType deleteType) {
+		Teacher teacher = null;
+
 		switch (deleteType) {
 			case HARD:
-				if (!repository.existsById(id))
-					throw new AppBadRequestException("Teacher is not found with id: " + id);
+				teacher = repository.findById(id)
+						.orElseThrow(() -> new AppBadRequestException("Teacher is not found with id: " + id));
 
-				repository.deleteById(id);
+				UUID userId = teacher.getUser().getId();
+
+				repository.delete(teacher);
+
+				if (userRepository.existsById(userId))
+					userRepository.deleteById(userId);
+
 				break;
 
 			case SOFT:
-				Teacher teacher = repository.findByIdAndVisibleTrue(id)
+				teacher = repository.findByIdAndVisibleTrue(id)
 						.orElseThrow(() -> new AppBadRequestException("Teacher is not found with id: " + id));
 
 				teacher.setVisible(false);
+
+				User user = teacher.getUser();
+				user.setVisible(false);
+				teacher.setUser(user);
+
+				userRepository.save(user);
 				repository.save(teacher);
 				break;
 			default:

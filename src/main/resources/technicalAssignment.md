@@ -36,14 +36,14 @@ Write the appropriate fields for the group teacher and student entities.
  4. - [x] data seeder for admin
  5. - [x] admin add teacher
  6. - [x] global exception handler - controller advice
- 7. - [-] admin add group `with assigning a teacher`
+ 7. - [x] admin add group `with assigning a teacher`
  8. - [ ] admin add student `with assigning to a group` *any group*
  9. - [ ] teacher add student `with assigning to a group` *his/her group*
  10. - [x] admin see all teachers
  11. - [ ] admin see all students
- 12. - [ ] admin see all groups
- 13. - [ ] teacher see their groups
- 14. - [ ] student see his/her groups
+ 12. - [-] admin see all groups
+ 13. - [-] teacher see their groups
+ 14. - [-] student see his/her groups
  15. - [ ] student CRUD
  16. - [x] teacher CRUD
  17. - [ ] group CRUD
