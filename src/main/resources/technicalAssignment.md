@@ -37,7 +37,7 @@ Write the appropriate fields for the group teacher and student entities.
  5. - [x] admin add teacher
  6. - [x] global exception handler - controller advice
  7. - [x] admin add group `with assigning a teacher`
- 8. - [ ] admin add student `with assigning to a group` *any group*
+ 8. - [-] admin add student `with assigning to a group` *any group*
  9. - [ ] teacher add student `with assigning to a group` *his/her group*
  10. - [x] admin see all teachers
  11. - [ ] admin see all students
@@ -46,7 +46,7 @@ Write the appropriate fields for the group teacher and student entities.
  14. - [x] student see his/her groups
  15. - [ ] student CRUD
  16. - [x] teacher CRUD
- 17. - [-] group CRUD
+ 17. - [x] group CRUD
  18. - [ ] add swagger & its cofig
  19. - [ ] write README.md
   - include chart.png reference
