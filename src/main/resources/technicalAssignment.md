@@ -34,19 +34,21 @@ Write the appropriate fields for the group teacher and student entities.
  2. - [x] draw entity chart
  3. - [x] implement JpaAuditing
  4. - [x] data seeder for admin
- 5. - [-] admin add teacher
- 6. - [ ] admin add group `with assigning a teacher`
- 7. - [ ] admin add student `with assigning to a group` *any group*
- 8. - [ ] teacher add student `with assigning to a group` *his/her group*
- 9. - [ ] admin see all teachers
- 10. - [ ] admin see all students
- 11. - [ ] admin see all groups
- 12. - [ ] teacher see their groups
- 13. - [ ] student see his/her groups
- 14. - [ ] student CRUD
- 15. - [ ] teacher CRUD
- 16. - [ ] group CRUD
- 17. - [ ] add swagger & its cofig
- 18. - [ ] write README.md
+ 5. - [x] admin add teacher
+ 6. - [x] global exception handler - controller advice
+ 7. - [ ] admin add group `with assigning a teacher`
+ 8. - [ ] admin add student `with assigning to a group` *any group*
+ 9. - [ ] teacher add student `with assigning to a group` *his/her group*
+ 10. - [ ] admin see all teachers
+ 11. - [ ] admin see all students
+ 12. - [ ] admin see all groups
+ 13. - [-] teacher see their groups
+ 14. - [ ] student see his/her groups
+ 15. - [ ] student CRUD
+ 16. - [ ] teacher CRUD
+ 17. - [ ] group CRUD
+ 18. - [ ] add swagger & its cofig
+ 19. - [ ] write README.md
   - include chart.png reference
+  - include resources/http folder reference
 

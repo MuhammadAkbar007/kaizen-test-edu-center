@@ -1,15 +1,15 @@
 package uz.akbar.edu_center_kaizen.security;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.UUID;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import uz.akbar.edu_center_kaizen.entity.User;
 import uz.akbar.edu_center_kaizen.enums.GeneralStatus;
-
-import java.util.Collection;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 /** CustomUserDetails */
 public class CustomUserDetails implements UserDetails {
@@ -30,9 +30,16 @@ public class CustomUserDetails implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return user.getRoles().stream()
-				.map(role -> new SimpleGrantedAuthority(role.getRoleType().name()))
-				.collect(Collectors.toList());
+		// return user.getRoles().stream()
+		// .map(role -> new SimpleGrantedAuthority(role.getRoleType().name()))
+		// .collect(Collectors.toList());
+
+		if (user.getRole() != null) {
+			return Collections.singletonList(
+					new SimpleGrantedAuthority(user.getRole().getRoleType().name()));
+		}
+
+		return Collections.emptyList();
 	}
 
 	@Override

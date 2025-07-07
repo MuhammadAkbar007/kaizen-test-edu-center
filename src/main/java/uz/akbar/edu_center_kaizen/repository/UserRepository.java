@@ -9,6 +9,8 @@ import uz.akbar.edu_center_kaizen.entity.User;
 
 public interface UserRepository extends JpaRepository<User, UUID> {
 
+	boolean existsByUsername(String username);
+
 	Optional<User> findByUsername(String username);
 
 	Optional<User> findByUsernameAndVisibleTrue(String username);

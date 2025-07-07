@@ -7,7 +7,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,6 +35,6 @@ public class Role extends AbsLongEntity {
 	private String description;
 
 	@Builder.Default
-	@ManyToMany(mappedBy = "roles")
+	@OneToMany(mappedBy = "role")
 	Set<User> users = new HashSet<>();
 }

@@ -1,7 +1,6 @@
 package uz.akbar.edu_center_kaizen.service;
 
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -45,7 +44,8 @@ public class DataInitializationService {
 					.username(adminUsername)
 					.password(passwordEncoder.encode(adminPassword))
 					.status(GeneralStatus.ACTIVE)
-					.roles(Set.of(adminRole))
+					// .roles(Set.of(adminRole))
+					.role(adminRole)
 					.visible(true)
 					.build();
 
@@ -58,13 +58,14 @@ public class DataInitializationService {
 	}
 
 	private Role createOrGetAdminRole() {
-		Optional<Role> optional = roleRepository.findByRoleType(RoleType.ADMIN);
+		Optional<Role> optional = roleRepository.findByRoleType(RoleType.ROLE_ADMIN);
 		if (optional.isPresent())
 			return optional.get();
 
 		Role adminRole = Role.builder()
-				.roleType(RoleType.ADMIN)
+				.roleType(RoleType.ROLE_ADMIN)
 				.description("Default admin role")
+				.visible(true)
 				.build();
 
 		return roleRepository.save(adminRole);
