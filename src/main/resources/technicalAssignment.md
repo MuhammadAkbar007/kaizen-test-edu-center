@@ -41,12 +41,12 @@ Write the appropriate fields for the group teacher and student entities.
  9. - [ ] teacher add student `with assigning to a group` *his/her group*
  10. - [x] admin see all teachers
  11. - [ ] admin see all students
- 12. - [-] admin see all groups
- 13. - [-] teacher see their groups
- 14. - [-] student see his/her groups
+ 12. - [x] admin see all groups
+ 13. - [x] teacher see their groups
+ 14. - [x] student see his/her groups
  15. - [ ] student CRUD
  16. - [x] teacher CRUD
- 17. - [ ] group CRUD
+ 17. - [-] group CRUD
  18. - [ ] add swagger & its cofig
  19. - [ ] write README.md
   - include chart.png reference
