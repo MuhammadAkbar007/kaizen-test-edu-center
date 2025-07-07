@@ -1,5 +1,7 @@
 package uz.akbar.edu_center_kaizen.mapper;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.NullValuePropertyMappingStrategy;
@@ -24,4 +26,6 @@ public interface TeacherMapper {
 
 	@Mapping(target = "userId", source = "user.id")
 	TeacherDetailsDto toDetailsDto(Teacher teacher);
+
+	List<TeacherDetailsDto> toDetailsDtoList(List<Teacher> teachers);
 }

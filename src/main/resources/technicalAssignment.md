@@ -39,13 +39,13 @@ Write the appropriate fields for the group teacher and student entities.
  7. - [ ] admin add group `with assigning a teacher`
  8. - [ ] admin add student `with assigning to a group` *any group*
  9. - [ ] teacher add student `with assigning to a group` *his/her group*
- 10. - [ ] admin see all teachers
+ 10. - [x] admin see all teachers
  11. - [ ] admin see all students
  12. - [ ] admin see all groups
- 13. - [-] teacher see their groups
+ 13. - [ ] teacher see their groups
  14. - [ ] student see his/her groups
  15. - [ ] student CRUD
- 16. - [ ] teacher CRUD
+ 16. - [-] teacher CRUD
  17. - [ ] group CRUD
  18. - [ ] add swagger & its cofig
  19. - [ ] write README.md

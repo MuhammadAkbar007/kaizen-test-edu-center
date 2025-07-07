@@ -1,5 +1,9 @@
 package uz.akbar.edu_center_kaizen.service.implementation;
 
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +18,7 @@ import uz.akbar.edu_center_kaizen.exception.AppBadRequestException;
 import uz.akbar.edu_center_kaizen.mapper.TeacherMapper;
 import uz.akbar.edu_center_kaizen.payload.request.TeacherCreateDto;
 import uz.akbar.edu_center_kaizen.payload.response.AppResponse;
+import uz.akbar.edu_center_kaizen.payload.response.PaginationData;
 import uz.akbar.edu_center_kaizen.payload.response.TeacherDetailsDto;
 import uz.akbar.edu_center_kaizen.repository.RoleRepository;
 import uz.akbar.edu_center_kaizen.repository.TeacherRepository;
@@ -70,6 +75,15 @@ public class TeacherServiceImpl implements TeacherService {
 		TeacherDetailsDto teacherDetailsDto = mapper.toDetailsDto(saved);
 
 		return AppResponse.success("Teacher successfully created", teacherDetailsDto);
+	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public AppResponse<PaginationData<TeacherDetailsDto>> getAll(int page, int size) {
+		Page<Teacher> teachersPage = repository.findAll(PageRequest.of(page, size));
+		List<TeacherDetailsDto> teacherDetailsDtoList = mapper.toDetailsDtoList(teachersPage.getContent());
+		PaginationData<TeacherDetailsDto> teachers = PaginationData.of(teacherDetailsDtoList, teachersPage);
+		return AppResponse.success("Teachers retieved successfully", teachers);
 	}
 
 }
