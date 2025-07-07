@@ -165,10 +165,13 @@ public class TeacherServiceImpl implements TeacherService {
 			isTeacherModified = true;
 		}
 
-		if (isUserModified)
-			teacher.setUser(user);
+		if (isUserModified) {
+			User savedUser = userRepository.save(user);
+			teacher.setUser(savedUser);
+			isTeacherModified = true;
+		}
 
-		if (isUserModified || isTeacherModified) {
+		if (isTeacherModified) {
 			Teacher saved = repository.save(teacher);
 			return AppResponse.success("Teacher successfully updated", mapper.toDetailsDto(saved));
 		}
@@ -184,27 +187,20 @@ public class TeacherServiceImpl implements TeacherService {
 			case HARD:
 				teacher = repository.findById(id)
 						.orElseThrow(() -> new AppBadRequestException("Teacher is not found with id: " + id));
-
-				UUID userId = teacher.getUser().getId();
-
+				userRepository.delete(teacher.getUser());
 				repository.delete(teacher);
-
-				if (userRepository.existsById(userId))
-					userRepository.deleteById(userId);
-
 				break;
 
 			case SOFT:
 				teacher = repository.findByIdAndVisibleTrue(id)
 						.orElseThrow(() -> new AppBadRequestException("Teacher is not found with id: " + id));
 
-				teacher.setVisible(false);
-
 				User user = teacher.getUser();
 				user.setVisible(false);
-				teacher.setUser(user);
+				User savedUser = userRepository.save(user);
 
-				userRepository.save(user);
+				teacher.setVisible(false);
+				teacher.setUser(savedUser);
 				repository.save(teacher);
 				break;
 			default:

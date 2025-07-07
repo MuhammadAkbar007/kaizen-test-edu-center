@@ -11,5 +11,9 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
 	boolean existsByPhoneNumber(String phoneNumber);
 
+	boolean existsByPhoneNumberAndIdNot(String phoneNumber, Long excludingId);
+
+	Optional<Student> findByIdAndVisibleTrue(Long id);
+
 	Optional<Student> findByUserAndVisibleTrue(User user);
 }
