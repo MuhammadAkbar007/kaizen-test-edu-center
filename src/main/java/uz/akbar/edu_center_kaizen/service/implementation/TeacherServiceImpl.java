@@ -1,5 +1,6 @@
 package uz.akbar.edu_center_kaizen.service.implementation;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -7,11 +8,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import lombok.RequiredArgsConstructor;
 import uz.akbar.edu_center_kaizen.entity.Role;
 import uz.akbar.edu_center_kaizen.entity.Teacher;
 import uz.akbar.edu_center_kaizen.entity.User;
+import uz.akbar.edu_center_kaizen.enums.DeleteType;
 import uz.akbar.edu_center_kaizen.enums.GeneralStatus;
 import uz.akbar.edu_center_kaizen.enums.RoleType;
 import uz.akbar.edu_center_kaizen.exception.AppBadRequestException;
@@ -93,6 +96,104 @@ public class TeacherServiceImpl implements TeacherService {
 				.orElseThrow(() -> new AppBadRequestException("Teacher not found with id: " + id));
 
 		return AppResponse.success("teacher retrieved successfully", mapper.toDetailsDto(teacher));
+	}
+
+	@Transactional
+	@Override
+	public AppResponse<TeacherDetailsDto> update(Long id, TeacherCreateDto dto) {
+		String newUsername = dto.username();
+		String newPhoneNumber = dto.phoneNumber();
+		String newSpecialization = dto.specialization();
+		String newQualification = dto.qualification();
+		LocalDate newHireDate = dto.hireDate();
+		boolean isUserModified = false;
+		boolean isTeacherModified = false;
+
+		Teacher teacher = repository.findByIdAndVisibleTrue(id)
+				.orElseThrow(() -> new AppBadRequestException("Teacher not found with id: " + id));
+
+		User user = teacher.getUser();
+
+		// set newUsername if available
+		if (!user.getUsername().equals(newUsername)) { // if newUsername is different than user's
+			if (userRepository.existsByUsernameAndIdNot(newUsername, user.getId()))
+				throw new AppBadRequestException("Username is already taken: " + newUsername);
+
+			user.setUsername(newUsername);
+			isUserModified = true;
+		}
+
+		// set newPhoneNumber if available
+		if (!teacher.getPhoneNumber().equals(newPhoneNumber)) { // if newPhoneNumber is different than teacher's
+			if (repository.existsByPhoneNumberAndIdNot(newPhoneNumber, teacher.getId()))
+				throw new AppBadRequestException("Phone number is already taken: " + newPhoneNumber);
+
+			teacher.setPhoneNumber(newPhoneNumber);
+			isTeacherModified = true;
+		}
+
+		// if newPassword is different than user's
+		if (!passwordEncoder.matches(dto.password(), user.getPassword())) {
+			user.setPassword(passwordEncoder.encode(dto.password()));
+			isUserModified = true;
+		}
+
+		if (!dto.firstName().equals(teacher.getFirstName())) {
+			teacher.setFirstName(dto.firstName());
+			isTeacherModified = true;
+		}
+
+		if (!dto.lastName().equals(teacher.getLastName())) {
+			teacher.setLastName(dto.lastName());
+			isTeacherModified = true;
+		}
+
+		if (StringUtils.hasText(newSpecialization) && !newSpecialization.equals(teacher.getSpecialization())) {
+			teacher.setSpecialization(newSpecialization);
+			isTeacherModified = true;
+		}
+
+		if (StringUtils.hasText(newQualification) && !newQualification.equals(teacher.getQualification())) {
+			teacher.setQualification(newQualification);
+			isTeacherModified = true;
+		}
+
+		if (newHireDate != null && !newHireDate.isEqual(teacher.getHireDate())) {
+			teacher.setHireDate(newHireDate);
+			isTeacherModified = true;
+		}
+
+		if (isUserModified)
+			teacher.setUser(user);
+
+		if (isUserModified || isTeacherModified) {
+			Teacher saved = repository.save(teacher);
+			return AppResponse.success("Teacher successfully updated", mapper.toDetailsDto(saved));
+		}
+		return AppResponse.error("Nothing updated");
+	}
+
+	@Transactional
+	@Override
+	public void delete(Long id, DeleteType deleteType) {
+		switch (deleteType) {
+			case HARD:
+				if (!repository.existsById(id))
+					throw new AppBadRequestException("Teacher is not found with id: " + id);
+
+				repository.deleteById(id);
+				break;
+
+			case SOFT:
+				Teacher teacher = repository.findByIdAndVisibleTrue(id)
+						.orElseThrow(() -> new AppBadRequestException("Teacher is not found with id: " + id));
+
+				teacher.setVisible(false);
+				repository.save(teacher);
+				break;
+			default:
+				throw new AppBadRequestException("Wrong deletion type");
+		}
 	}
 
 }
