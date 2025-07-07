@@ -9,5 +9,7 @@ import uz.akbar.edu_center_kaizen.entity.User;
 
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
+	boolean existsByPhoneNumber(String phoneNumber);
+
 	Optional<Student> findByUserAndVisibleTrue(User user);
 }

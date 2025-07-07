@@ -37,10 +37,10 @@ Write the appropriate fields for the group teacher and student entities.
  5. - [x] admin add teacher
  6. - [x] global exception handler - controller advice
  7. - [x] admin add group `with assigning a teacher`
- 8. - [-] admin add student `with assigning to a group` *any group*
- 9. - [ ] teacher add student `with assigning to a group` *his/her group*
+ 8. - [x] admin add student `with assigning to a group` *any group*
+ 9. - [x] teacher add student `with assigning to a group` *his/her group*
  10. - [x] admin see all teachers
- 11. - [ ] admin see all students
+ 11. - [-] admin see all students
  12. - [x] admin see all groups
  13. - [x] teacher see their groups
  14. - [x] student see his/her groups

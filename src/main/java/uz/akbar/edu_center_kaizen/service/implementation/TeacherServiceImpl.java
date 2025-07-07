@@ -55,6 +55,7 @@ public class TeacherServiceImpl implements TeacherService {
 			Role newRole = Role.builder()
 					.roleType(RoleType.ROLE_TEACHER)
 					.description("Teacher role for edu center")
+					.visible(true)
 					.build();
 			return roleRepository.save(newRole);
 		});

@@ -41,7 +41,7 @@ public class Student extends AbsLongAuditableEntity {
 	@Column(nullable = false)
 	private String lastName;
 
-	@Column(unique = true)
+	@Column(nullable = false, unique = true)
 	private String phoneNumber;
 
 	private LocalDate dateOfBirth;
