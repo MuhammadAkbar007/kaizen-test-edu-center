@@ -30,11 +30,23 @@ Create the group teacher and student entities and do full CRUD of them.
 Write the appropriate fields for the group teacher and student entities.
 
 ## Tasks
- - [x] implement Security
- - [x] draw entity chart
- - [x] implement JpaAuditing
- - [-] data seeder for admin
- - [ ] add swagger & its cofig
- - [ ] write README.md
+ 1. - [x] implement Security
+ 2. - [x] draw entity chart
+ 3. - [x] implement JpaAuditing
+ 4. - [x] data seeder for admin
+ 5. - [-] admin add teacher
+ 6. - [ ] admin add group `with assigning a teacher`
+ 7. - [ ] admin add student `with assigning to a group` *any group*
+ 8. - [ ] teacher add student `with assigning to a group` *his/her group*
+ 9. - [ ] admin see all teachers
+ 10. - [ ] admin see all students
+ 11. - [ ] admin see all groups
+ 12. - [ ] teacher see their groups
+ 13. - [ ] student see his/her groups
+ 14. - [ ] student CRUD
+ 15. - [ ] teacher CRUD
+ 16. - [ ] group CRUD
+ 17. - [ ] add swagger & its cofig
+ 18. - [ ] write README.md
   - include chart.png reference
 
