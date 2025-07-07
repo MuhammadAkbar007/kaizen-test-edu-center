@@ -10,4 +10,6 @@ public interface TeacherService {
 	AppResponse<TeacherDetailsDto> create(TeacherCreateDto dto);
 
 	AppResponse<PaginationData<TeacherDetailsDto>> getAll(int page, int size);
+
+	AppResponse<TeacherDetailsDto> getById(Long id);
 }

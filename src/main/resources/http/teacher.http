@@ -23,6 +23,10 @@ Content-Type: application/json
 	"hireDate": "2024-01-15"
 }
 
-### create teacher as admin
+### get all teachers in page as admin
+GET http://localhost:8080/api/v1/teacher
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJha2JhcmpvbmRldjAwN0BnbWFpbC5jb20iLCJ1c2VySWQiOiIyMDc3NTJjMy02Y2E0LTQzZTktYTlhZS1mOWFkM2E5ZjM4M2EiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9ST0xFX0FETUlOIn1dLCJpYXQiOjE3NTE4OTQ5NjMsImV4cCI6MTc1MTg5ODU2M30.1BZuV_P03jnnEufxU-iD-3ZhM2L9dcWA3obqo6vDEvzVqOZ6ChmwHj_I8ZzgcYsKmF2r652bmflBUoE9u0X7ug
+
+### get a teacher by id as admin
 GET http://localhost:8080/api/v1/teacher
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJha2JhcmpvbmRldjAwN0BnbWFpbC5jb20iLCJ1c2VySWQiOiIyMDc3NTJjMy02Y2E0LTQzZTktYTlhZS1mOWFkM2E5ZjM4M2EiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9ST0xFX0FETUlOIn1dLCJpYXQiOjE3NTE4OTQ5NjMsImV4cCI6MTc1MTg5ODU2M30.1BZuV_P03jnnEufxU-iD-3ZhM2L9dcWA3obqo6vDEvzVqOZ6ChmwHj_I8ZzgcYsKmF2r652bmflBUoE9u0X7ug

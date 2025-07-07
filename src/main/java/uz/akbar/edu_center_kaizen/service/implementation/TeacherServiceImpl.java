@@ -86,4 +86,13 @@ public class TeacherServiceImpl implements TeacherService {
 		return AppResponse.success("Teachers retieved successfully", teachers);
 	}
 
+	@Transactional(readOnly = true)
+	@Override
+	public AppResponse<TeacherDetailsDto> getById(Long id) {
+		Teacher teacher = repository.findByIdAndVisibleTrue(id)
+				.orElseThrow(() -> new AppBadRequestException("Teacher not found with id: " + id));
+
+		return AppResponse.success("teacher retrieved successfully", mapper.toDetailsDto(teacher));
+	}
+
 }
