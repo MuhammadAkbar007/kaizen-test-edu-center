@@ -1,5 +1,7 @@
 package uz.akbar.edu_center_kaizen.enums;
 
 public enum StudentStatus {
-	STUDYING, GRADUATED, EXPELLED
+    STUDYING,
+    GRADUATED,
+    EXPELLED
 }
